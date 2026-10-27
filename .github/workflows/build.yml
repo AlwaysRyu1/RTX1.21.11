@@ -15,10 +15,11 @@ jobs:
           distribution: 'temurin'
           java-version: '21'
 
-      - name: Build with Gradle
-        uses: gradle/actions/setup-gradle@v3
-        with:
-          arguments: build
+      - name: Generate Gradle Wrapper & Build
+        run: |
+          gradle wrapper --gradle-version 8.8
+          chmod +x gradlew
+          ./gradlew build --info
 
       - name: Upload Artifact (.jar)
         uses: actions/upload-artifact@v4
