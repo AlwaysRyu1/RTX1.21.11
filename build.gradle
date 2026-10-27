@@ -3,28 +3,31 @@ plugins {
     id 'maven-publish'
 }
 
-version = project.mod_version
-group = project.maven_group
+version = project.property('mod_version')
+group = project.property('maven_group')
 
 base {
-    archivesName = project.archives_base_name
+    archivesName = project.property('archives_base_name')
 }
 
 repositories {
-    mavenCentral()
+    // Tambahkan repository tambahan di sini jika diperlukan
 }
 
 dependencies {
-    minecraft "com.mojang:minecraft:${project.minecraft_version}"
-    mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
-    modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
-    modImplementation "net.fabricmc:fabric-api:${project.fabric_api_version}"
+    // Konfigurasi Minecraft 1.21.11 & Java 21
+    minecraft "com.mojang:minecraft:${project.property('minecraft_version')}"
+    mappings "net.fabricmc:yarn:${project.property('yarn_mappings')}:v2"
+    modImplementation "net.fabricmc:fabric-loader:${project.property('loader_version')}"
+
+    // Fabric API 
+    modImplementation "net.fabricmc.fabric-api:fabric-api:${project.property('fabric_version')}"
 }
 
 processResources {
-    inputs.property "version", project.mod_version
+    inputs.property "version", project.version
     filesMatching("fabric.mod.json") {
-        expand "version": project.mod_version
+        expand "version": project.version
     }
 }
 
@@ -33,7 +36,13 @@ tasks.withType(JavaCompile).configureEach {
 }
 
 java {
+    withSourcesJar()
     sourceCompatibility = JavaVersion.VERSION_21
     targetCompatibility = JavaVersion.VERSION_21
-    withSourcesJar()
+}
+
+jar {
+    from("LICENSE") {
+        rename { "${it}_${project.archivesName}" }
+    }
 }
