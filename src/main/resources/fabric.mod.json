@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "id": "rtxclient",
+  "version": "${version}",
+  "name": "RTX Client",
+  "description": "ClickGUI RTX Client untuk Minecraft 1.21.11",
+  "authors": ["Ryuukitenkai"],
+  "contact": {},
+  "license": "MIT",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "com.rtxclient.RTXClientMod"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=0.15.0",
+    "minecraft": "~1.21.11",
+    "java": ">=21",
+    "fabric-api": "*"
+  }
+}
