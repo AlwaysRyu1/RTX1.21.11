@@ -14,7 +14,7 @@ public class RTXClientMod implements ClientModInitializer {
     public void onInitializeClient() {
         toggleKey = KeyBindingHelper.registerKeyBinding(new KeyBinding(
             "key.rtxclient.gui",
-            InputUtil.Type.KEY_SYM,
+            InputUtil.Type.KEYSYM,
             GLFW.GLFW_KEY_RIGHT_SHIFT,
             "category.rtxclient"
         ));
